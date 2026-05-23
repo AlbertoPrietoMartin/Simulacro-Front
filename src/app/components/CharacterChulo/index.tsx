@@ -3,7 +3,7 @@ import { Character } from "@/app/types/RicardoYMortirio";
 
 const CharacterChulo = ({character}: {character: Character}) =>{
     return(
-        <div className ="ContainerCharacterChulangano">
+        <div className ="ContainerChulangano">
             <img src = {character.image}/>
             <div className = "InfoContainer">
                 <h1>{character.name}</h1>
