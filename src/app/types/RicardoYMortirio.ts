@@ -47,3 +47,18 @@ export type ResultsEpisode ={
   info: Info,
   results: Episode[]
 }
+
+export type Location ={
+  id:number;
+  name: string,
+  type: string,
+  dimension: string,
+  residents: string[],
+  url: string;
+  creates: string
+}
+
+export type ResultsLocation ={
+  info: Info,
+  results: Location[]
+}
