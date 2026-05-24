@@ -4,3 +4,26 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
+
+
+.SearchContainer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.SearchContainer input{
+    width: 200px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+    background-color: rgba(0,0,0,0.5);
+    color: #FABADA;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.SearchContainer input::placeholder{
+    color: rgba(250, 186, 218, 0.5);
+}

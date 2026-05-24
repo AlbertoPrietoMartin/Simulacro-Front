@@ -13,10 +13,14 @@ const PageCharacter =() =>{
     const [loading, setLoading]=useState(true);
     const [error, setError]=useState("");
     const [page,setPage] = useState(1);
+    const [search, setSearch] = useState("");
 
-    const getCharacters = async(page?: number)=>{
+    const getCharacters = async(page?: number, name?: string)=>{
+        
+        setError("");
+
         try{
-            api.get(`/character?page=${page}`).then((e)=>{
+            await api.get(`/character?page=${page}&name=${name ?? ""}`).then((e)=>{
                 const {data}: {data:ResultsCharacter}=e;
                 setResultCharacter(data);
                 setLoading(false);
@@ -24,19 +28,18 @@ const PageCharacter =() =>{
                 setLoading(false);
             })
         }catch(e:any){
+            setResultCharacter(null);
             setError(String(e));
         }
     }
-    
-    useEffect(()=>{
-        if(error){
-            alert(error);
-        }
-    },[error]);
 
     useEffect(()=>{
-        getCharacters(page);
-    },[page]);
+        getCharacters(page, search);
+    },[page, search]);
+
+    useEffect(()=>{
+        setPage(1);
+    },[search]);
 
     if(loading){
         return <p>Loading...</p>
@@ -44,7 +47,15 @@ const PageCharacter =() =>{
 
     return(
         <div>
-            
+            <div className = "SearchContainer">
+                <input 
+                    value = {search}
+                    onChange = {(e=>setSearch(e.target.value))}
+                    placeholder="Buscar personajes..."
+                />
+            </div>       
+
+            {!resultCharacter && search && <p>No se encontraron personajes</p>}
 
             <div className = "CharactersContainer">
                 {resultCharacter && resultCharacter.results.map((e)=>(
